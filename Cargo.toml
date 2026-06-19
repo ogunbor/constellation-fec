@@ -1,0 +1,28 @@
+[package]
+name = "constellation-fec"
+version = "0.1.0"
+edition = "2024"
+description = "Reed-Solomon erasure coding harness parameterised for Constellation (MCP) pslices/pshreds"
+license = "MIT"
+
+[lib]
+name = "constellation_fec"
+path = "src/lib.rs"
+
+[[bin]]
+name = "constellation-fec"
+path = "src/main.rs"
+
+[dependencies]
+# Erasure coding — core of the pslice/pshred encode-decode cycle
+reed-solomon-erasure = { version = "6.0.0", features = ["simd-accel"] }
+
+# Randomized loss simulation
+rand = "0.8"
+
+# Error propagation
+anyhow = "1.0.102"
+
+[profile.release]
+opt-level = 3
+lto = true
